@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Navigation from "./Navigation/Navigation";
 import HomePage from "./views/HomePage/HomePage";
 import MoviesPage from "./views/MoviesPage/MoviesPage";
+import MoviesItem from "./views/MoviesItem/MoviesItem";
 import NotFoundViews from "./views/NotFoundViews";
 
 import "./App.module.css";
@@ -17,8 +18,12 @@ function App() {
           <HomePage />
         </Route>
 
-        <Route path="/movies">
+        <Route exact path="/movies">
           <MoviesPage />
+        </Route>
+
+        <Route path="/movies/:moviesId">
+          <MoviesItem />
         </Route>
 
         <Route>
