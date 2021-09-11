@@ -6,11 +6,9 @@ import MoviesPage from "./views/MoviesPage/MoviesPage";
 import MoviesItem from "./views/MoviesItem/MoviesItem";
 import NotFoundViews from "./views/NotFoundViews";
 
-import "./App.module.css";
-
 function App() {
   return (
-    <div className="App">
+    <div>
       <Navigation />
 
       <Switch>

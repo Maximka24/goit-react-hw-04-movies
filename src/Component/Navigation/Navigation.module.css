@@ -1,19 +1,20 @@
 .Navigation {
   padding: 20px;
+  padding-left: 50px;
   border-bottom: 2px solid #000;
 }
 
 .NavLink {
   text-decoration: none;
-  color: rgb(126, 154, 247);
+  color: rgb(9, 91, 172);
   padding-right: 30px;
   font-size: 32px;
 }
 
 .NavLink:hover {
-  color: rgb(241, 238, 4);
+  color: rgb(248, 155, 68);
 }
 
 .ActiveNavLink {
-  color: rgb(241, 238, 4);
+  color: rgb(248, 155, 68);
 }

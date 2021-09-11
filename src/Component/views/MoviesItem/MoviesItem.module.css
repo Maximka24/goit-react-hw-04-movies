@@ -1,0 +1,62 @@
+.ContainerMoviesId {
+  padding-left: 50px;
+  padding-top: 20px;
+  margin: 0;
+  border-bottom: 1px solid rgb(151, 151, 151);
+  padding-bottom: 20px;
+}
+
+.InformMovies {
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.BtnBack {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.InformMoviesCard {
+  margin-left: 30px;
+}
+
+.InformMoviesCard h2 {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 20px;
+  font-size: 32px;
+}
+
+.InformMoviesCard p {
+  padding: 0;
+  margin: 0;
+}
+
+.InformMoviesCard h3 {
+  margin: 0;
+  padding: 0;
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+.InformMoviesCard ul {
+  display: flex;
+  text-decoration: none;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ElListGenres {
+  margin-right: 15px;
+}
+
+.AdditionalInfo {
+  padding-left: 50px;
+  padding-top: 20px;
+  margin: 0;
+  border-bottom: 1px solid rgb(151, 151, 151);
+  padding-bottom: 20px;
+}

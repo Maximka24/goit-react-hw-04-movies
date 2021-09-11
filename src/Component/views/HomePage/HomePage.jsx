@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import * as GetApi from "../../GetApi";
 
-// import s from './HomePage.module.css';
+import s from "./HomePage.module.css";
 
 export default function HomePage() {
   const [homePageMovies, setHomePageMovies] = useState();
@@ -15,13 +15,18 @@ export default function HomePage() {
   }, []);
 
   return (
-    <ul>
-      {homePageMovies &&
-        homePageMovies.results.map((movie) => (
-          <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>
-          </li>
-        ))}
-    </ul>
+    <>
+      <h2>Popular movies for the week:</h2>
+      <ul className={s.ListTrendingMovies}>
+        {homePageMovies &&
+          homePageMovies.results.map((movie) => (
+            <li key={movie.id}>
+              <Link className={s.LinkElementMovies} to={`/movies/${movie.id}`}>
+                {movie.original_title}
+              </Link>
+            </li>
+          ))}
+      </ul>
+    </>
   );
 }
