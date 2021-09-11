@@ -1,0 +1,23 @@
+/* max-width: calc(100vw - 48px); */
+
+.CastsContainer {
+  margin: 0;
+  padding: 20px 50px 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.CastsItm {
+  margin: 10px 5px 0 0;
+  padding: 10px;
+  list-style-type: none;
+  border: 1px solid rgb(151, 151, 151);
+  width: calc((100% - 10 * 15px) / 5);
+  align-items: center;
+  text-align: center;
+}
+
+.CastsItm h2 {
+  padding: 0;
+  margin: 0;
+}

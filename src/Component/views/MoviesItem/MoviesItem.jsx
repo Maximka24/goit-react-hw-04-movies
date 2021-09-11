@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, NavLink, useRouteMatch, Route } from "react-router-dom";
 
 import { BiArrowBack } from "react-icons/bi";
 
 import * as GetApi from "../../GetApi";
 
+import CastsMovies from "../CastsMovies/CastsMovies";
+
 import s from "./MoviesItem.module.css";
 
 export default function MoviesItem() {
+  const { url } = useRouteMatch();
   const { moviesId } = useParams();
   const [MoviesItem, setMoviesItem] = useState(null);
 
@@ -16,8 +19,6 @@ export default function MoviesItem() {
       setMoviesItem(movies)
     );
   }, [moviesId]);
-
-  console.log(MoviesItem);
 
   return (
     <>
@@ -32,7 +33,7 @@ export default function MoviesItem() {
             <div className={s.InformMovies}>
               <img
                 src={`https://image.tmdb.org/t/p/w200/${MoviesItem.poster_path}`}
-                alt=""
+                alt={MoviesItem.title}
               />
               <div className={s.InformMoviesCard}>
                 <h2>{MoviesItem.title}</h2>
@@ -41,9 +42,9 @@ export default function MoviesItem() {
                 <p>{MoviesItem.overview}</p>
                 <h3>Genres</h3>
                 <ul>
-                  {MoviesItem.genres.map((movies) => (
-                    <li className={s.ElListGenres} key={movies.id}>
-                      {movies.name}
+                  {MoviesItem.genres.map((movie) => (
+                    <li className={s.ElListGenres} key={movie.id}>
+                      {movie.name}
                     </li>
                   ))}
                 </ul>
@@ -55,13 +56,18 @@ export default function MoviesItem() {
             <h3>Additional information</h3>
             <ul>
               <li>
-                <Link>Cast</Link>
+                <NavLink to={`${url}/cast`}>Cast</NavLink>
               </li>
               <li>
-                <Link>Reviews</Link>
+                <NavLink to={`${url}/reviews`}>Reviews</NavLink>
               </li>
             </ul>
           </div>
+
+          <Route path={`${url}/cast`}>
+            <CastsMovies moviesId={moviesId} />
+          </Route>
+          {/* <Route path={`${url}/reviews`}></Route> */}
         </>
       )}
     </>
