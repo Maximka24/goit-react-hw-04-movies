@@ -1,0 +1,23 @@
+.ReviewContainer {
+  margin: 0;
+  padding: 20px 50px 20px;
+}
+
+.ReviewElement {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  margin-bottom: 30px;
+}
+
+.ReviewElement h2 {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 15px;
+  padding-left: 25px;
+}
+
+.ReviewElement p {
+  margin: 0;
+  padding: 0;
+}

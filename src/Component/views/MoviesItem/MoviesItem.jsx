@@ -6,6 +6,7 @@ import { BiArrowBack } from "react-icons/bi";
 import * as GetApi from "../../GetApi";
 
 import CastsMovies from "../CastsMovies/CastsMovies";
+import ReviewMovies from "../ReviewMovies/ReviewMovies";
 
 import s from "./MoviesItem.module.css";
 
@@ -67,7 +68,10 @@ export default function MoviesItem() {
           <Route path={`${url}/cast`}>
             <CastsMovies moviesId={moviesId} />
           </Route>
-          {/* <Route path={`${url}/reviews`}></Route> */}
+
+          <Route path={`${url}/reviews`}>
+            <ReviewMovies moviesId={moviesId} />
+          </Route>
         </>
       )}
     </>

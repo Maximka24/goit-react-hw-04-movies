@@ -29,12 +29,14 @@ export function GetFullInformationMoviesApi(movieId) {
   );
 }
 
+// Запрос инф. о актерском составе
 export function GetInformationActorMoviesApi(movieId) {
   return fetchApiMoviesRender(
     `${MOVIES_Get_API}/movie/${movieId}/credits?api_key=${KEY_API}&language=en-US`
   );
 }
 
+// запрос обзоров о фильме
 export function GetReviewMoviesApi(movieId) {
   return fetchApiMoviesRender(
     `${MOVIES_Get_API}/movie/${movieId}/reviews?api_key=${KEY_API}&language=en-US&page=1`
