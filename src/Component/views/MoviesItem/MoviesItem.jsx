@@ -1,16 +1,27 @@
-import { useEffect, useState } from "react";
-import { useParams, NavLink, useRouteMatch, Route } from "react-router-dom";
+import { useEffect, useState, lazy, Suspense } from "react";
+import {
+  useParams,
+  NavLink,
+  useRouteMatch,
+  Route,
+  useLocation,
+  useHistory,
+} from "react-router-dom";
 
 import { BiArrowBack } from "react-icons/bi";
 
 import * as GetApi from "../../GetApi";
-
-import CastsMovies from "../CastsMovies/CastsMovies";
-import ReviewMovies from "../ReviewMovies/ReviewMovies";
-
 import s from "./MoviesItem.module.css";
 
+// import CastsMovies from "../CastsMovies/CastsMovies";
+// import ReviewMovies from "../ReviewMovies/ReviewMovies";
+
+const CastsMovies = lazy(() => import("../CastsMovies/CastsMovies"));
+const ReviewMovies = lazy(() => import("../ReviewMovies/ReviewMovies"));
+
 export default function MoviesItem() {
+  const history = useHistory();
+  const location = useLocation();
   const { url } = useRouteMatch();
   const { moviesId } = useParams();
   const [MoviesItem, setMoviesItem] = useState(null);
@@ -21,12 +32,16 @@ export default function MoviesItem() {
     );
   }, [moviesId]);
 
+  const onGoBack = () => {
+    history.push(location?.state?.from ?? "/");
+  };
+
   return (
     <>
       {MoviesItem && (
         <>
           <div className={s.ContainerMoviesId}>
-            <button className={s.BtnBack}>
+            <button type="button" className={s.BtnBack} onClick={onGoBack}>
               <BiArrowBack />
               Go back!
             </button>
@@ -65,13 +80,15 @@ export default function MoviesItem() {
             </ul>
           </div>
 
-          <Route path={`${url}/cast`}>
-            <CastsMovies moviesId={moviesId} />
-          </Route>
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Route path={`${url}/cast`}>
+              <CastsMovies moviesId={moviesId} />
+            </Route>
 
-          <Route path={`${url}/reviews`}>
-            <ReviewMovies moviesId={moviesId} />
-          </Route>
+            <Route path={`${url}/reviews`}>
+              <ReviewMovies moviesId={moviesId} />
+            </Route>
+          </Suspense>
         </>
       )}
     </>

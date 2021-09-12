@@ -16,6 +16,14 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  outline: none;
+  border-radius: 5px;
+}
+.BtnBack:hover {
+  cursor: pointer;
+  border: 2px solid rgb(248, 155, 68);
+  border-radius: 5px;
+  color: rgb(248, 155, 68);
 }
 
 .InformMoviesCard {

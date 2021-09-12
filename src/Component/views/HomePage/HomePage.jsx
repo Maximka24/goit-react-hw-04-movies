@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import * as GetApi from "../../GetApi";
 
@@ -7,6 +7,7 @@ import s from "./HomePage.module.css";
 
 export default function HomePage() {
   const [homePageMovies, setHomePageMovies] = useState();
+  const location = useLocation();
 
   useEffect(() => {
     GetApi.GetTrendingWeekMoviesApi().then((movies) =>
@@ -21,7 +22,13 @@ export default function HomePage() {
         {homePageMovies &&
           homePageMovies.results.map((movie) => (
             <li key={movie.id}>
-              <Link className={s.LinkElementMovies} to={`/movies/${movie.id}`}>
+              <Link
+                className={s.LinkElementMovies}
+                to={{
+                  pathname: `/movies/${movie.id}`,
+                  state: { from: location },
+                }}
+              >
                 {movie.original_title}
               </Link>
             </li>

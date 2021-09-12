@@ -1,9 +1,12 @@
-// import s from './HomePage.module.css';
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 export default function NotFoudViews() {
-  return (
-    <div>
-      <h1>404! Извините такой страницы не существует!</h1>
-    </div>
-  );
+  const history = useHistory();
+
+  useEffect(() => {
+    history.push("/");
+  });
+
+  return <div></div>;
 }

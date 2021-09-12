@@ -1,20 +1,24 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
+
+import { useLocation, useHistory } from "react-router-dom";
+
 import { BiSearch } from "react-icons/bi";
 
-import * as GetApi from "../../GetApi";
-import SearchMoviesListOfName from "../../SearchMoviesListOfName/SearchMoviesListOfName";
+// import * as GetApi from "../../GetApi";
+// import SearchMoviesListOfName from "../../SearchMoviesListOfName/SearchMoviesListOfName";
 
 import s from "./MoviesPage.module.css";
 
-export default function MoviesPage() {
-  const [nameMovies, setNameMovies] = useState("");
-  const [listMoviesSearch, setListMoviesSearch] = useState(null);
+const SearchMoviesListOfName = lazy(() =>
+  import("../../SearchMoviesListOfName/SearchMoviesListOfName")
+);
 
-  const onSubmit = (nameMovies) => {
-    GetApi.GetSearchMoviesApi(nameMovies).then((movies) =>
-      setListMoviesSearch(movies)
-    );
-  };
+export default function MoviesPage() {
+  const location = useLocation();
+  const history = useHistory();
+
+  const [nameMovies, setNameMovies] = useState("");
+  const [nameMoviesSubmit, setNameMoviesSubmit] = useState("");
 
   const handleNameChangeInput = (event) => {
     setNameMovies(event.currentTarget.value.toLowerCase());
@@ -27,8 +31,13 @@ export default function MoviesPage() {
       return alert("Введите название фильма!");
     }
 
-    onSubmit(nameMovies);
+    setNameMoviesSubmit(nameMovies);
     setNameMovies("");
+
+    history.push({
+      ...location,
+      search: `query=${nameMovies}`,
+    });
   };
 
   return (
@@ -51,9 +60,11 @@ export default function MoviesPage() {
         </form>
       </div>
 
-      {listMoviesSearch && (
-        <SearchMoviesListOfName listMoviesSearch={listMoviesSearch} />
-      )}
+      <Suspense fallback={<h1>Loading...</h1>}>
+        {nameMoviesSubmit !== "" && (
+          <SearchMoviesListOfName nameMoviesSubmit={nameMoviesSubmit} />
+        )}
+      </Suspense>
     </div>
   );
 }
