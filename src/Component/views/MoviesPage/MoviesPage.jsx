@@ -13,24 +13,34 @@ const SearchMoviesListOfName = lazy(() =>
   import("../../SearchMoviesListOfName/SearchMoviesListOfName")
 );
 
-// const debounce = require('lodash.debounce');
-
 export default function MoviesPage() {
   const location = useLocation();
   const history = useHistory();
 
   const [nameMovies, setNameMovies] = useState("");
-  const [nameMoviesSubmit, setNameMoviesSubmit] = useState("");
   const [listMoviesSearch, setListMoviesSearch] = useState(null);
 
   useEffect(() => {
+    if (nameMovies === "") {
+      return;
+    }
+
     GetApi.GetSearchMoviesApi(nameMovies).then((movies) =>
       setListMoviesSearch(movies)
     );
 
+    history.push({
+      ...location,
+      search: `query=${nameMovies}`,
+    });
+
     console.log("История", history);
     console.log("Локал", location);
+    console.log("гет запрос", listMoviesSearch);
   }, [nameMovies]);
+
+  console.log("История после возврата", history);
+  console.log("Локал после возврата", location);
 
   const handleNameChangeInput = (event) => {
     setNameMovies(event.currentTarget.value.toLowerCase());
@@ -42,14 +52,7 @@ export default function MoviesPage() {
     if (nameMovies.trim() === "") {
       return alert("Введите название фильма!");
     }
-
-    setNameMoviesSubmit(nameMovies);
     // setNameMovies("");
-
-    history.push({
-      ...location,
-      search: `query=${nameMovies}`,
-    });
   };
 
   return (
@@ -73,7 +76,7 @@ export default function MoviesPage() {
       </div>
 
       <Suspense fallback={<h1>Loading...</h1>}>
-        {nameMoviesSubmit !== "" && (
+        {listMoviesSearch && (
           <SearchMoviesListOfName listMoviesSearch={listMoviesSearch} />
         )}
       </Suspense>
