@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/Component/views/ReviewMovies/ReviewMovies.module.css"],"names":[],"mappings":"AAAA,qCACE,QAAS,CACT,iBACF","file":"9.b62562c1.chunk.css","sourcesContent":[".ReviewContainer {\n  margin: 0;\n  padding: 20px 50px 20px;\n}\n"]}
