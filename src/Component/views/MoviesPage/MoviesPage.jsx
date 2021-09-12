@@ -1,10 +1,10 @@
-import { useState, lazy, Suspense } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 
 import { useLocation, useHistory } from "react-router-dom";
 
 import { BiSearch } from "react-icons/bi";
 
-// import * as GetApi from "../../GetApi";
+import * as GetApi from "../../GetApi";
 // import SearchMoviesListOfName from "../../SearchMoviesListOfName/SearchMoviesListOfName";
 
 import s from "./MoviesPage.module.css";
@@ -13,12 +13,23 @@ const SearchMoviesListOfName = lazy(() =>
   import("../../SearchMoviesListOfName/SearchMoviesListOfName")
 );
 
+// const debounce = require('lodash.debounce');
+
 export default function MoviesPage() {
   const location = useLocation();
   const history = useHistory();
 
   const [nameMovies, setNameMovies] = useState("");
   const [nameMoviesSubmit, setNameMoviesSubmit] = useState("");
+  const [listMoviesSearch, setListMoviesSearch] = useState(null);
+
+  useEffect(() => {
+    GetApi.GetSearchMoviesApi(nameMovies).then((movies) =>
+      setListMoviesSearch(movies)
+    );
+  }, [nameMovies]);
+
+  console.log(listMoviesSearch);
 
   const handleNameChangeInput = (event) => {
     setNameMovies(event.currentTarget.value.toLowerCase());
@@ -32,7 +43,7 @@ export default function MoviesPage() {
     }
 
     setNameMoviesSubmit(nameMovies);
-    setNameMovies("");
+    // setNameMovies("");
 
     history.push({
       ...location,
@@ -62,7 +73,7 @@ export default function MoviesPage() {
 
       <Suspense fallback={<h1>Loading...</h1>}>
         {nameMoviesSubmit !== "" && (
-          <SearchMoviesListOfName nameMoviesSubmit={nameMoviesSubmit} />
+          <SearchMoviesListOfName listMoviesSearch={listMoviesSearch} />
         )}
       </Suspense>
     </div>

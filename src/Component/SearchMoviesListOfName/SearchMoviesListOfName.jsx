@@ -1,24 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
-
-import * as GetApi from "../GetApi";
 
 import s from "./SearchMoviesListOfName.module.css";
 
-export default function SearchMoviesListOfName({ nameMoviesSubmit }) {
+export default function SearchMoviesListOfName({ listMoviesSearch }) {
   const location = useLocation();
-
-  const [listMoviesSearch, setListMoviesSearch] = useState(null);
-
-  useEffect(() => {
-    GetApi.GetSearchMoviesApi(nameMoviesSubmit).then((movies) =>
-      setListMoviesSearch(movies)
-    );
-  }, []);
 
   return (
     <ul className={s.ListTrendingMovies}>
-      {listMoviesSearch !== null &&
+      {listMoviesSearch &&
         listMoviesSearch.results.map((movie) => (
           <li key={movie.id}>
             <Link
