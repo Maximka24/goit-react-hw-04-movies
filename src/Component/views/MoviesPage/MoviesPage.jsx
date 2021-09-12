@@ -27,9 +27,10 @@ export default function MoviesPage() {
     GetApi.GetSearchMoviesApi(nameMovies).then((movies) =>
       setListMoviesSearch(movies)
     );
-  }, [nameMovies]);
 
-  console.log(listMoviesSearch);
+    console.log("История", history);
+    console.log("Локал", location);
+  }, [nameMovies]);
 
   const handleNameChangeInput = (event) => {
     setNameMovies(event.currentTarget.value.toLowerCase());
