@@ -18,9 +18,17 @@ export default function MoviesPage() {
   const history = useHistory();
 
   const [nameMovies, setNameMovies] = useState("");
+  const [nameMoviesTarget, setNameMoviesTarget] = useState("");
   const [listMoviesSearch, setListMoviesSearch] = useState(null);
 
+  const focusNameMovie =
+    new URLSearchParams(location.search).get("query") ?? "";
+
   useEffect(() => {
+    if (nameMoviesTarget === "") {
+      setNameMovies(focusNameMovie);
+    }
+
     if (nameMovies === "") {
       return;
     }
@@ -34,25 +42,21 @@ export default function MoviesPage() {
       search: `query=${nameMovies}`,
     });
 
-    console.log("История", history);
-    console.log("Локал", location);
-    console.log("гет запрос", listMoviesSearch);
+    setNameMoviesTarget("");
   }, [nameMovies]);
 
-  console.log("История после возврата", history);
-  console.log("Локал после возврата", location);
-
   const handleNameChangeInput = (event) => {
-    setNameMovies(event.currentTarget.value.toLowerCase());
+    setNameMoviesTarget(event.currentTarget.value.toLowerCase());
   };
 
   const handelSubmitForm = (event) => {
     event.preventDefault();
 
-    if (nameMovies.trim() === "") {
+    if (nameMoviesTarget.trim() === "") {
       return alert("Введите название фильма!");
     }
-    // setNameMovies("");
+
+    setNameMovies(nameMoviesTarget);
   };
 
   return (
@@ -63,7 +67,7 @@ export default function MoviesPage() {
             type="tel"
             placeholder="Search name movies..."
             name="number"
-            value={nameMovies}
+            value={nameMoviesTarget}
             onChange={handleNameChangeInput}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Наименование изображения может состоять только из букв!!!"

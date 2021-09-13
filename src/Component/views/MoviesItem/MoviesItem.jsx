@@ -33,7 +33,7 @@ export default function MoviesItem() {
   }, [moviesId]);
 
   const onGoBack = () => {
-    history.push(location?.state?.from ?? "/");
+    history.push(location?.state?.from);
   };
 
   return (
@@ -72,10 +72,24 @@ export default function MoviesItem() {
             <h3>Additional information</h3>
             <ul>
               <li>
-                <NavLink to={`${url}/cast`}>Cast</NavLink>
+                <NavLink
+                  to={{
+                    pathname: `${url}/cast`,
+                    state: location.state,
+                  }}
+                >
+                  Cast
+                </NavLink>
               </li>
               <li>
-                <NavLink to={`${url}/reviews`}>Reviews</NavLink>
+                <NavLink
+                  to={{
+                    pathname: `${url}/reviews`,
+                    state: location.state,
+                  }}
+                >
+                  Reviews
+                </NavLink>
               </li>
             </ul>
           </div>
