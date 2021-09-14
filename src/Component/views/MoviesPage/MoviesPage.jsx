@@ -69,8 +69,8 @@ export default function MoviesPage() {
             name="number"
             value={nameMoviesTarget}
             onChange={handleNameChangeInput}
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Наименование изображения может состоять только из букв!!!"
+            pattern="^[a-zA-Zа-яА-Я,1-9]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Наименование фильма может состоять только из букв!!!"
             // required
           />
           <button className={s.BtnForm} type="submit">
